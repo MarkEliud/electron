@@ -7,7 +7,7 @@ This tweaks Chrome's Accessibility support at chrome://accessibility
 to make it usable from Electron by removing Profile references.
 
 diff --git a/chrome/browser/ui/webui/accessibility/accessibility_ui.cc b/chrome/browser/ui/webui/accessibility/accessibility_ui.cc
-index 45b085ebb5096b2cdd083337371539a249c7a0a8..404a0a8d99eb68a35c0c06fe1b1dbfa3086e8794 100644
+index aff8a187b6d81172bf5930c6da6bfed4d7989057..a054784ec5d107feca0f101f243b0be8f6d8b774 100644
 --- a/chrome/browser/ui/webui/accessibility/accessibility_ui.cc
 +++ b/chrome/browser/ui/webui/accessibility/accessibility_ui.cc
 @@ -23,7 +23,10 @@
@@ -21,8 +21,8 @@ index 45b085ebb5096b2cdd083337371539a249c7a0a8..404a0a8d99eb68a35c0c06fe1b1dbfa3
  #include "chrome/common/pref_names.h"
  #include "chrome/common/webui_url_constants.h"
  #include "chrome/grit/accessibility_resources.h"
-@@ -33,6 +36,7 @@
- #include "content/public/browser/ax_event_notification_details.h"
+@@ -32,6 +35,7 @@
+ #include "components/prefs/pref_service.h"
  #include "content/public/browser/ax_inspect_factory.h"
  #include "content/public/browser/browser_accessibility_state.h"
 +#include "content/public/browser/browser_context.h"
@@ -156,10 +156,10 @@ index 45b085ebb5096b2cdd083337371539a249c7a0a8..404a0a8d99eb68a35c0c06fe1b1dbfa3
 +#endif
  }
 diff --git a/chrome/browser/ui/webui/accessibility/accessibility_ui.h b/chrome/browser/ui/webui/accessibility/accessibility_ui.h
-index b62ebe504451d7dcd057a3fb6fa64ecd8897c26f..b0e54b76fa9a42df789b12f2e7e6d1ebd41b6aed 100644
+index 45dead36d71f1c91e1be607180e548854083304c..79a2742e6b95e9ab8257c0f1af75eeebce8566e9 100644
 --- a/chrome/browser/ui/webui/accessibility/accessibility_ui.h
 +++ b/chrome/browser/ui/webui/accessibility/accessibility_ui.h
-@@ -27,6 +27,8 @@ class ScopedAccessibilityMode;
+@@ -30,6 +30,8 @@ class ScopedAccessibilityMode;
  class WebContents;
  }  // namespace content
  
@@ -168,7 +168,7 @@ index b62ebe504451d7dcd057a3fb6fa64ecd8897c26f..b0e54b76fa9a42df789b12f2e7e6d1eb
  namespace user_prefs {
  class PrefRegistrySyncable;
  }  // namespace user_prefs
-@@ -79,6 +81,8 @@ class AccessibilityUIMessageHandler : public content::WebUIMessageHandler {
+@@ -82,6 +84,8 @@ class AccessibilityUIMessageHandler : public content::WebUIMessageHandler {
    static void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry);
  
   private:
