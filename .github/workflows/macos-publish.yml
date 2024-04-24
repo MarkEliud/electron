@@ -21,4 +21,11 @@ on:
 jobs:
   publish:
     uses: electron/electron/.github/workflows/macos-build.yml@gh-macos-publish
+    with:
+      IS_RELEASE: true
+      GN_CONFIG: //electron/build/args/release.gn
+      GN_BUILD_TYPE: release
+      GENERATE_SYMBOLS: true
+      UPLOAD_TO_STORAGE: '1'
+      STRIP_BINARIES: true
     secrets: inherit
